@@ -1,0 +1,35 @@
+.containerSummaryCard{
+   display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+   gap: 20px;
+   padding: 15px;
+}
+
+/* الألوان الافتراضية (Light Mode) */
+:root {
+  --bg-color: #f8f9fa;
+  --card-bg: #ffffff;
+  --text-color: #212529;
+  --border-color: #dee2e6;
+}
+
+/* الألوان عند تفعيل الـ Dark Mode */
+body.dark-mode {
+  --bg-color: #121212;
+  --card-bg: #1e1e1e;
+  --text-color: #f8f9fa;
+  --border-color: #333333;
+}
+
+/* تطبيق المتغيرات على عناصر الصفحة */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+}
