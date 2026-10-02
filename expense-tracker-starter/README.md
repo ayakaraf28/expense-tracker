@@ -1,5 +1,7 @@
 # Expense Tracker
 
+🔗 **GitHub Repository:** [https://github.com/ayakaraf28/expense-tracker](https://github.com/ayakaraf28/expense-tracker)
+
 <!-- A dynamic full-stack web application designed to help users efficiently manage and track their personal finances. It allows users to add, edit, delete, and filter expenses, with interactive visual insights via charts, summary statistics, exportable CSV reports, dark mode support, and a bulk-delete feature. -->
 
 ## How to run
@@ -69,13 +71,17 @@ DB_NAME=expense-tracker
 
 11-[x] Fully responsive layout across mobile and desktop devices
 
-## Screenshots
+## Screenshots & Demo
 
 ### Desktop View
 ![Desktop View](./images/desktopTesting.png)
 
 ### Mobile View
 ![Mobile View](./images/mobileTesting.png)
+## Demo Video
+
+🎬 **Watch the App Demo:** [Expense Tracker Demo Video](https://drive.google.com/file/d/10oCMNU2WeJ_t9v7iVWCioM614KUg-1Zu/view?usp=sharing)
+
 ## What was the hardest part?
 
 <!--The most challenging aspect was integrating the frontend with the backend REST API, as it was my first time connecting a client-side interface to a full Express.js & PostgreSQL pipeline. Without a predefined template to follow, I spent considerable time researching official documentation, analyzing code examples, and testing fetch requests until I gained a solid grasp of end-to-end data flow.
