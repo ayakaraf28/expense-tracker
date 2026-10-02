@@ -2,7 +2,7 @@
 
 🔗 **GitHub Repository:** [https://github.com/ayakaraf28/expense-tracker](https://github.com/ayakaraf28/expense-tracker)
 
-<!-- A dynamic full-stack web application designed to help users efficiently manage and track their personal finances. It allows users to add, edit, delete, and filter expenses, with interactive visual insights via charts, summary statistics, exportable CSV reports, dark mode support, and a bulk-delete feature. -->
+ A dynamic full-stack web application designed to help users efficiently manage and track their personal finances. It allows users to add, edit, delete, and filter expenses, with interactive visual insights via charts, summary statistics, exportable CSV reports, dark mode support, and a bulk-delete feature. 
 
 ## How to run
 
@@ -84,6 +84,6 @@ DB_NAME=expense-tracker
 
 ## What was the hardest part?
 
-<!--The most challenging aspect was integrating the frontend with the backend REST API, as it was my first time connecting a client-side interface to a full Express.js & PostgreSQL pipeline. Without a predefined template to follow, I spent considerable time researching official documentation, analyzing code examples, and testing fetch requests until I gained a solid grasp of end-to-end data flow.
+The most challenging aspect was integrating the frontend with the backend REST API, as it was my first time connecting a client-side interface to a full Express.js & PostgreSQL pipeline. Without a predefined template to follow, I spent considerable time researching official documentation, analyzing code examples, and testing fetch requests until I gained a solid grasp of end-to-end data flow.
 
-Additionally, implementing extra features like the CSV export required deep diving into native Web APIs (such as Blob objects and UTF-8 encoding),it was a valuable learning curve that strengthened my overall problem-solving and full-stack development skills-->
+Additionally, implementing extra features like the CSV export required deep diving into native Web APIs (such as Blob objects and UTF-8 encoding),it was a valuable learning curve that strengthened my overall problem-solving and full-stack development skills

@@ -6,8 +6,9 @@ const spinner = document.getElementById("spinner");
 let currentId = null;
 //يعرض البيانات الي بالداتا أول ما اعرض الصفحة
 document.addEventListener("DOMContentLoaded", () => {
-  initChart();
+   initChart();
   refresh(); // تحميل البيانات لأول مرة
+  
 
   const filterSelect = document.getElementById("filterCategory");
   if (filterSelect) {
@@ -375,18 +376,12 @@ function getCategoryColor(category) {
   const badgeClass = getCategoryByBadgeClass(category);
 
   switch (badgeClass) {
-    case "bg-success":
-      return "#198754"; // Green - Food
-    case "bg-primary":
-      return "#0d6efd"; // Blue - Transport
-    case "bg-warning":
-      return "#ffc107"; // Yellow - Bills
-    case "bg-danger":
-      return "#dc3545"; // Red - Entertainment
-    case "bg-secondary":
-      return "#6c757d"; // Gray - Others
-    default:
-      return "#212529"; // Dark
+    case "bg-success":   return "#198754"; // Green - Food
+    case "bg-primary":   return "#0d6efd"; // Blue - Transport
+    case "bg-warning":   return "#ffc107"; // Yellow - Bills
+    case "bg-danger":    return "#dc3545"; // Red - Entertainment
+    case "bg-secondary": return "#6c757d"; // Gray - Others
+    default:             return "#212529"; // Dark
   }
 }
 
@@ -395,7 +390,7 @@ function initChart() {
   if (!chartCanvas) return;
 
   // إذا كان هناك رسم بياني قديم مخزن ادمرهً
-  const existingChart = Chart.getChart(chartCanvas);
+  const existingChart = Chart.getChart(chartCanvas); 
   if (existingChart) {
     existingChart.destroy();
   }
@@ -404,23 +399,21 @@ function initChart() {
     type: "doughnut",
     data: {
       labels: [],
-      datasets: [
-        {
-          label: "Expenses ($)",
-          data: [],
-          backgroundColor: [],
-          borderWidth: 1,
-        },
-      ],
+      datasets: [{
+        label: "Expenses ($)",
+        data: [],
+        backgroundColor: [],
+        borderWidth: 1
+      }]
     },
     options: {
       responsive: true,
       plugins: {
         legend: {
-          position: "bottom",
-        },
-      },
-    },
+          position: "bottom"
+        }
+      }
+    }
   });
 }
 
@@ -436,7 +429,7 @@ function updateChart(list) {
   // تجميع مبالغ كل فئة
   const categoryTotals = {};
 
-  (list || []).forEach((item) => {
+  (list || []).forEach(item => {
     const category = item.category || "Others";
     const amount = parseFloat(item.amount) || 0;
 
@@ -449,7 +442,7 @@ function updateChart(list) {
 
   const labels = Object.keys(categoryTotals);
   const data = Object.values(categoryTotals);
-  const bgColors = labels.map((cat) => getCategoryColor(cat));
+  const bgColors = labels.map(cat => getCategoryColor(cat));
 
   // تحديث بيانات الـ Chart
   myChart.data.labels = labels;
@@ -460,95 +453,90 @@ function updateChart(list) {
   myChart.update();
 }
 //dark mode code
-const toggleBtn = document.getElementById("themeToggleBtn");
+const toggleBtn = document.getElementById('themeToggleBtn');
 
 // اتأكد من الاختيار الاولي للشاشة dark or light
-if (localStorage.getItem("theme") === "dark") {
-  document.body.classList.add("dark-mode");
-  toggleBtn.textContent = "☀️ Light Mode";
+if (localStorage.getItem('theme') === 'dark') {
+  document.body.classList.add('dark-mode');
+  toggleBtn.textContent = '☀️ Light Mode';
 }
 
 // الاستجابة لضغطة الزر
-toggleBtn.addEventListener("click", () => {
-  document.body.classList.toggle("dark-mode");
-
-  const isDark = document.body.classList.contains("dark-mode");
-
+toggleBtn.addEventListener('click', () => {
+  document.body.classList.toggle('dark-mode');
+  
+  const isDark = document.body.classList.contains('dark-mode');
+  
   // تغيير نص الزر وحفظ الاختيار
-  toggleBtn.textContent = isDark ? "☀️ Light Mode" : "🌙 Dark Mode";
-  localStorage.setItem("theme", isDark ? "dark" : "light");
+  toggleBtn.textContent = isDark ? '☀️ Light Mode' : '🌙 Dark Mode';
+  localStorage.setItem('theme', isDark ? 'dark' : 'light');
 });
 
 //اضافة خاصية تصدير المصاريف كملف CSV
-document.getElementById("exportCsvBtn").addEventListener("click", exportToCSV);
+document.getElementById('exportCsvBtn').addEventListener('click', exportToCSV);
 
 function exportToCSV() {
   //  التحقق من وجود مصاريف لتصديرها
   if (!allExpenses || allExpenses.length === 0) {
-    alert("No expenses available to export!");
+    alert('No expenses available to export!');
     return;
   }
 
   //تحديد رؤوس أعمدة الـ CSV
-  const headers = ["Title", "Amount ($)", "Category", "Date"];
-
+  const headers = ['Title', 'Amount ($)', 'Category', 'Date'];
+  
   //تحويل المصفوفة إلى أسطر نصية بصيغة CSV
   const csvRows = [];
-
+  
   // إضافة سطر العناوين
-  csvRows.push(headers.join(","));
+  csvRows.push(headers.join(','));
 
   // إضافة بيانات كل مصروف
-  allExpenses.forEach((exp) => {
+  allExpenses.forEach(exp => {
     // تنظيف البيانات لو احتوت على فواصل كي لا تخرب تنسيق الـ CSV
-    const title = `"${exp.title || ""}"`;
+    const title = `"${exp.title || ''}"`;
     const amount = exp.amount || 0;
-    const category = `"${exp.category || ""}"`;
-    const date = `"${(exp.date || "").replace(/"/g, '""')}"`;
+    const category = `"${exp.category || ''}"`;
+    const date = `"${(exp.date || '').replace(/"/g, '""')}"`;
 
-    const row = [title, amount, category, date];
-    csvRows.push(row.join(","));
+    const row = [title, amount, category ,date];
+    csvRows.push(row.join(','));
   });
 
   // 4. دمج جميع الأسطر بنص واحد يفصل بينها سطر جديد
-  const csvString = csvRows.join("\n");
+  const csvString = csvRows.join('\n');
 
   // 5. إنشاء Blob وتنزيل الملف تلقائياً
-  const blob = new Blob([csvString], { type: "text/csv;charset=utf-8;" });
+  const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
   const url = URL.createObjectURL(blob);
-
-  const link = document.createElement("a");
-  link.setAttribute("href", url);
-  link.setAttribute(
-    "download",
-    `expenses_report_${new Date().toISOString().slice(0, 10)}.csv`,
-  );
-  link.style.visibility = "hidden";
-
+  
+  const link = document.createElement('a');
+  link.setAttribute('href', url);
+  link.setAttribute('download', `expenses_report_${new Date().toISOString().slice(0, 10)}.csv`);
+  link.style.visibility = 'hidden';
+  
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
 }
-//اضافة خاصية حذف كل المصاريف مرة وحدة
-const deleteAll = document
-  .getElementById("deleteAllBtn")
-  .addEventListener("click", deleteAllExpenses);
+//اضافة خاصية حذف كل المصاريف مرة وحدة 
+const deleteAll=document.getElementById("deleteAllBtn").addEventListener('click',deleteAllExpenses);
 function deleteAllExpenses() {
   if (!allExpenses || allExpenses.length === 0) {
     alert("No expenses to delete!");
     return;
   }
-  const isConfirmed = confirm(
-    "Are you sure you want to delete all expenses? This action cannot be undone.",
-  );
+  const isConfirmed = confirm("Are you sure you want to delete all expenses? This action cannot be undone.");
 
   if (isConfirmed) {
+     
     allExpenses = [];
-
-    refresh();
-
+    
+    refresh(); 
+    
     alert("All expenses have been deleted successfully.");
   }
 }
+
 
 const API_URL = "http://localhost:3000/api/expenses";
