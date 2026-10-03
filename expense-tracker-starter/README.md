@@ -78,9 +78,11 @@ DB_NAME=expense-tracker
 
 ### Mobile View
 ![Mobile View](./images/mobileTesting.png)
+### Bouns Features
+![Bouns](./images/bouns.png)
 ## Demo Video
 
-🎬 **Watch the App Demo:** [Expense Tracker Demo Video](https://drive.google.com/file/d/10oCMNU2WeJ_t9v7iVWCioM614KUg-1Zu/view?usp=sharing)
+🎬 **Watch the App Demo:** [Expense Tracker Demo Video](https://drive.google.com/file/d/1KVpeV4Ukb70K5fHfRhPsZmMuGqK2JwNG/view?usp=sharing)
 
 ## What was the hardest part?
 

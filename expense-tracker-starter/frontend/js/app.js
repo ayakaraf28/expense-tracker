@@ -208,6 +208,35 @@ expenseForm.addEventListener("submit", async (e) => {
   // يفرغ الحقول بعد عملية الإضافة
   expenseForm.reset();
 });
+//لاظهار alert حسب حالة الطلب تم بنجاح أو لأ
+function showStatusMessage(text, isSuccess = true) {
+  const msgElement = document.getElementById("statusMessage");
+  if (!msgElement) {
+    console.warn("Element with id 'statusMessage' was not found in HTML.");
+    return;
+  }
+  
+  msgElement.style.display = "block";
+
+  if (isSuccess) {
+    msgElement.innerHTML=`<i class="fa-sharp-duotone fa-light fa-party-horn"></i>${text}`
+    // لون أخضر للنجاح
+    msgElement.style.backgroundColor = "#d4edda";
+    msgElement.style.color = "#155724";
+    msgElement.style.border = "1px solid #c3e6cb";
+  } else {
+    msgElement.innerHTML=`<i class="fa-solid fa-circle-xmark"></i>${text}`
+    // لون أحمر للفشل
+    msgElement.style.backgroundColor = "#f8d7da";
+    msgElement.style.color = "#721c24";
+    msgElement.style.border = "1px solid #f5c6cb";
+  }
+
+  // إخفاء الرسالة تلقائياً بعد 3 ثواني
+  setTimeout(() => {
+    msgElement.style.display = "none";
+  }, 4000);
+}
 
 async function addExpense(data) {
   try {
@@ -223,9 +252,10 @@ async function addExpense(data) {
       throw new Error("Failed to add expense");
     }
     await refresh();
+    showStatusMessage("Expense has been added successfully",true)
   } catch (error) {
     console.error("Error adding expense:", error.message);
-    alert("Something went error while adding an expense" + error.message);
+    showStatusMessage("Something went wrong while adding this expense,Please try again" + error.message, false);
   } finally {
     hideSpinner();
   }
@@ -244,9 +274,11 @@ async function updateExpense(id, data) {
       throw new Error("Failed to update expense");
     }
     await refresh();
+    showStatusMessage("Expense has been updated successfully",true)
+
   } catch (error) {
     console.error("Error updating expense:", error.message);
-    alert("Something went error while adding an expense" + error.message);
+    showStatusMessage("Something went wrong while updating this expense,Please try again" + error.message, false);
   } finally {
     hideSpinner();
   }
@@ -263,9 +295,11 @@ async function deleteExpense(id) {
       throw new Error("Failed to delete expense");
     }
     await refresh();
+    showStatusMessage("Expense has been deleted successfully",true)
+
   } catch (error) {
     console.error("Error deleting expense:", error.message);
-    alert("Something went wrong while deleting the expense: " + error.message);
+    showStatusMessage("Something went wrong while deleting this expense,Please try again" + error.message, false);
   } finally {
     hideSpinner();
   }
